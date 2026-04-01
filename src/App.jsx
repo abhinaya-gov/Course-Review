@@ -167,7 +167,8 @@ export default function App() {
           <div className="success-icon">✓</div>
           <h1>Review Submitted!</h1>
           <p>Thank you, <strong>{isTech ? 'Technology' : selectedVoter.label}</strong>.</p>
-          <p>Your review for {votedCount} course{votedCount !== 1 ? 's' : ''} have been recorded.</p>
+          {/* <p>Your review for {votedCount} course{votedCount !== 1 ? 's' : ''} have been recorded.</p> */}
+          <p>Your reviews have been recorded.</p>
         </div>
       </div>
     );
