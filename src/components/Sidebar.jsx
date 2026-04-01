@@ -1,4 +1,4 @@
-export default function Sidebar({ department, location, votedCount, savedCount, totalCount, onSubmit, submitting, error, onBack }) {
+export default function Sidebar({ department, location, votedCount, savedCount, totalCount, onSubmit, submitting, error, onBack, onChangeLocation }) {
   const progress = totalCount > 0 ? (savedCount / totalCount) * 100 : 0;
 
   return (
@@ -15,6 +15,9 @@ export default function Sidebar({ department, location, votedCount, savedCount, 
             <span className="identity-dept">{department}</span>
             {location && <span className="identity-location">{location}</span>}
           </div>
+          {onChangeLocation && (
+            <button className="btn-change-location" onClick={onChangeLocation}>Change location</button>
+          )}
         </div>
       </div>
 

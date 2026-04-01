@@ -180,6 +180,23 @@ html, body, #root {
   margin-top: 2px;
 }
 
+.btn-change-location {
+  margin-top: 10px;
+  width: 100%;
+  padding: 7px 12px;
+  background: #fff;
+  border: 1px solid #C7D2FE;
+  border-radius: 6px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-change-location:hover {
+  background: #EEF2FF;
+}
+
 .back-link {
   background: none;
   border: none;

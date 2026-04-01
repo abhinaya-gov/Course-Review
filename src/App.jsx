@@ -191,6 +191,7 @@ export default function App() {
         submitting={submitting}
         error={error}
         onBack={() => { setView('home'); setSelectedVoter(null); setSelectedDept(null); setVotes({}); setLockedLocation(null); }}
+        onChangeLocation={isTech && lockedLocation ? () => { setLockedLocation(null); setVotes({}); } : null}
       />
       <main className="main">
         <div className="course-list">
