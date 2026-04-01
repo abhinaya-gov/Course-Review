@@ -12,7 +12,7 @@ export default function Home({ onSelect }) {
     <div className="home">
       <div className="home-header">
         {/* <div className="home-logo">📚</div> */}
-        <h1>Course Selection ZS 2028 Batch</h1>
+        <h1>Online Courses ZS 2028 Batch</h1>
         <p>Select your department below to start reviewing courses.</p>
       </div>
       <div className="dept-cards">
