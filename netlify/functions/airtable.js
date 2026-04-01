@@ -66,6 +66,21 @@ async function saveCourse(course) {
   return data.records[0];
 }
 
+async function fetchAllVotes() {
+  const allRecords = [];
+  let offset = null;
+  do {
+    const url = new URL(`https://api.airtable.com/v0/${VOTES_BASE_ID}/${VOTES_TABLE}`);
+    if (offset) url.searchParams.set('offset', offset);
+    const res = await fetch(url.toString(), { headers });
+    if (!res.ok) throw new Error('Failed to fetch votes');
+    const data = await res.json();
+    allRecords.push(...data.records);
+    offset = data.offset;
+  } while (offset);
+  return allRecords;
+}
+
 async function fetchUserCourses() {
   const allRecords = [];
   let offset = null;
@@ -106,6 +121,8 @@ exports.handler = async (event) => {
       result = await saveCourse(params.course);
     } else if (action === 'fetchUserCourses') {
       result = await fetchUserCourses();
+    } else if (action === 'fetchAllVotes') {
+      result = await fetchAllVotes();
     } else {
       return { statusCode: 400, body: `Unknown action: ${action}` };
     }

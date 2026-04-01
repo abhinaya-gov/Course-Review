@@ -2,10 +2,6 @@ import { useState, useEffect } from 'react';
 import { courses as staticCourses } from '../data/courses';
 import { fetchUserCourses } from '../airtable';
 
-const BASE_ID = import.meta.env.VITE_AIRTABLE_BASE_ID;
-const TOKEN = import.meta.env.VITE_AIRTABLE_TOKEN;
-const TABLE = 'tblzpWziv0tWT3yak';
-
 const TECH_LOCATIONS = ['Chennai', 'Thenkasi', 'Tharuvai', 'Kumbakonam'];
 const TECH_COLORS = ['#3b82f6', '#6366f1', '#8b5cf6', '#06b6d4'];
 
@@ -17,18 +13,13 @@ const GROUPS = [
 ];
 
 async function fetchAllVotes() {
-  const records = [];
-  let offset = null;
-  do {
-    const url = new URL(`https://api.airtable.com/v0/${BASE_ID}/${TABLE}`);
-    if (offset) url.searchParams.set('offset', offset);
-    const res = await fetch(url.toString(), { headers: { Authorization: `Bearer ${TOKEN}` } });
-    if (!res.ok) throw new Error('Failed to fetch votes');
-    const data = await res.json();
-    records.push(...data.records);
-    offset = data.offset;
-  } while (offset);
-  return records;
+  const res = await fetch('/.netlify/functions/airtable', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'fetchAllVotes' }),
+  });
+  if (!res.ok) throw new Error('Failed to fetch votes');
+  return res.json();
 }
 
 function aggregateVotes(records) {
